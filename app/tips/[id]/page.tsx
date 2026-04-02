@@ -151,7 +151,33 @@ export default function TipPage({ params }: { params: { id: string } }) {
                   <CardTitle>How to Implement This Tip</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="prose prose-emerald max-w-none" dangerouslySetInnerHTML={{ __html: tip.content }} />
+                  <div className="prose prose-emerald max-w-none space-y-4">
+                    {tip.content.split('\n\n').map((paragraph, index) => {
+                      const trimmed = paragraph.trim()
+                      if (trimmed.startsWith('<h2>')) {
+                        const text = trimmed.replace(/<\/?h2>/g, '')
+                        return <h2 key={index} className="text-xl font-bold mt-6 mb-2">{text}</h2>
+                      }
+                      if (trimmed.startsWith('<ul>')) {
+                        const items = trimmed.match(/<li>(.*?)<\/li>/g) || []
+                        return (
+                          <ul key={index} className="list-disc pl-5 space-y-1">
+                            {items.map((item, i) => (
+                              <li key={i}>{item.replace(/<\/?li>/g, '')}</li>
+                            ))}
+                          </ul>
+                        )
+                      }
+                      if (trimmed.startsWith('<p>')) {
+                        const text = trimmed.replace(/<\/?p>/g, '')
+                        return <p key={index} className="text-muted-foreground">{text}</p>
+                      }
+                      if (trimmed) {
+                        return <p key={index} className="text-muted-foreground">{trimmed}</p>
+                      }
+                      return null
+                    })}
+                  </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
                   <Button variant="outline" onClick={() => router.push("/tips")}>

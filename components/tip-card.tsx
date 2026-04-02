@@ -47,23 +47,18 @@ export function TipCard({
   const { user, isGuest } = useAuth()
   const { toast } = useToast()
 
-  // Generate some default content if none is provided
-  const fullContent =
-    content ||
-    `
-    <p>${description}</p>
-    <h3 class="text-lg font-semibold mt-4">Why This Matters</h3>
-    <p>Making sustainable choices in our daily lives helps reduce our environmental footprint and contributes to a healthier planet.</p>
-    <h3 class="text-lg font-semibold mt-4">How to Implement</h3>
-    <p>Start with small changes in your routine. Even minor adjustments can have a significant positive impact when adopted consistently.</p>
-    <h3 class="text-lg font-semibold mt-4">Benefits</h3>
-    <ul class="list-disc pl-5 mt-2">
-      <li>Reduces your carbon footprint</li>
-      <li>Conserves natural resources</li>
-      <li>Promotes a healthier environment</li>
-      <li>Often leads to cost savings over time</li>
-    </ul>
-  `
+  // Default content structure for tips without custom content
+  const defaultContent = {
+    intro: description,
+    whyItMatters: "Making sustainable choices in our daily lives helps reduce our environmental footprint and contributes to a healthier planet.",
+    howToImplement: "Start with small changes in your routine. Even minor adjustments can have a significant positive impact when adopted consistently.",
+    benefits: [
+      "Reduces your carbon footprint",
+      "Conserves natural resources",
+      "Promotes a healthier environment",
+      "Often leads to cost savings over time"
+    ]
+  }
 
   // Check if the tip is pinned on component mount
   useEffect(() => {
@@ -345,7 +340,33 @@ export function TipCard({
             </div>
           )}
 
-          <div className="mt-4" dangerouslySetInnerHTML={{ __html: fullContent }} />
+          <div className="mt-4 space-y-4">
+            {content ? (
+              <div className="prose prose-emerald max-w-none">
+                <p>{content}</p>
+              </div>
+            ) : (
+              <>
+                <p>{defaultContent.intro}</p>
+                <div>
+                  <h3 className="text-lg font-semibold mt-4">Why This Matters</h3>
+                  <p className="mt-2 text-muted-foreground">{defaultContent.whyItMatters}</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mt-4">How to Implement</h3>
+                  <p className="mt-2 text-muted-foreground">{defaultContent.howToImplement}</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mt-4">Benefits</h3>
+                  <ul className="list-disc pl-5 mt-2 space-y-1 text-muted-foreground">
+                    {defaultContent.benefits.map((benefit, index) => (
+                      <li key={index}>{benefit}</li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
+          </div>
           <div className="mt-4 flex justify-end">
             <Button
               variant={isPinned ? "default" : "outline"}
