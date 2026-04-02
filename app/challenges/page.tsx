@@ -5,13 +5,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Award, Calendar, Clock, Filter, Search, Users } from "lucide-react"
 import Link from "next/link"
-import Header from "@/components/header" // Updated import
 
 export default function ChallengesPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header activeLink="challenges" />
-      <main className="flex-1 bg-muted/40">
+    <div className="bg-muted/40 min-h-screen">
         <div className="container px-4 py-6 md:px-6 md:py-12">
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-2">
@@ -172,7 +169,7 @@ export default function ChallengesPage() {
             </Tabs>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   )
 }

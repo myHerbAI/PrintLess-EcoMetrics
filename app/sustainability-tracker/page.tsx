@@ -23,8 +23,6 @@ import {
   Share2,
   Printer,
 } from "lucide-react"
-import Header from "@/components/header"
-import { Footer } from "@/components/footer"
 import { useToast } from "@/hooks/use-toast"
 import { useAuth } from "@/context/auth-context"
 import {
@@ -464,11 +462,8 @@ This report was generated using EcoTrack, developed by myHerb.co.il.
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header activeLink="dashboard" />
-      <main className="flex-1 bg-muted/40">
-        {/* Main content remains the same... */}
-        <div className="container px-4 py-6 md:px-6 md:py-12">
+    <div className="bg-muted/40 min-h-screen">
+      <div className="container px-4 py-6 md:px-6 md:py-12">
           <div className="flex flex-col gap-6">
             {/* Title and description remain the same... */}
             <div className="flex flex-col gap-2">
@@ -1046,9 +1041,7 @@ This report was generated using EcoTrack, developed by myHerb.co.il.
             </Tabs>
           </div>
         </div>
-      </main>
-
-      <Footer />
+      </div>
 
       {/* Dialog is now properly separated from the dropdown */}
       <Dialog open={isEmailDialogOpen} onOpenChange={setIsEmailDialogOpen}>

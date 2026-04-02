@@ -7,8 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Award, Calendar, Check, Clock, Users } from "lucide-react"
-import Header from "@/components/header" // Updated import
+import { Award, Calendar, Check, Clock, Users, ArrowLeft } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { useAuth } from "@/context/auth-context"
 
@@ -135,21 +134,18 @@ export default function ChallengePage({ params }: { params: { id: string } }) {
 
   if (!challenge) {
     return (
-      <div className="flex min-h-screen flex-col">
-        <Header activeLink="challenges" />
-        <main className="flex-1 bg-muted/40 flex items-center justify-center">
-          <Card className="w-full max-w-md">
-            <CardHeader>
-              <CardTitle>Challenge Not Found</CardTitle>
-              <CardDescription>The challenge you're looking for doesn't exist.</CardDescription>
-            </CardHeader>
-            <CardFooter>
-              <Button onClick={() => router.push("/challenges")} className="w-full bg-emerald-600 hover:bg-emerald-700">
-                Back to Challenges
-              </Button>
-            </CardFooter>
-          </Card>
-        </main>
+      <div className="bg-muted/40 min-h-screen flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle>Challenge Not Found</CardTitle>
+            <CardDescription>The challenge you are looking for does not exist.</CardDescription>
+          </CardHeader>
+          <CardFooter>
+            <Button onClick={() => router.push("/challenges")} className="w-full bg-emerald-600 hover:bg-emerald-700">
+              Back to Challenges
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
     )
   }
@@ -181,38 +177,37 @@ export default function ChallengePage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header activeLink="challenges" />
-      <main className="flex-1 bg-muted/40">
-        <div className="container px-4 py-6 md:px-6 md:py-12">
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" onClick={() => router.push("/challenges")}>
-                  Back to Challenges
-                </Button>
-                <Badge
-                  variant="outline"
-                  className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300"
-                >
-                  {challenge.category}
-                </Badge>
-                <Badge
-                  variant={
-                    challenge.difficulty === "Easy"
-                      ? "default"
-                      : challenge.difficulty === "Medium"
-                        ? "secondary"
-                        : "destructive"
-                  }
-                  className="bg-emerald-100 text-emerald-800 hover:bg-emerald-200 hover:text-emerald-900 dark:bg-emerald-900 dark:text-emerald-100 dark:hover:bg-emerald-800"
-                >
-                  {challenge.difficulty}
-                </Badge>
-              </div>
-              <h1 className="text-3xl font-bold tracking-tight">{challenge.title}</h1>
-              <p className="text-muted-foreground">{challenge.description}</p>
+    <div className="bg-muted/40 min-h-screen">
+      <div className="container px-4 py-6 md:px-6 md:py-12">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
+            <Button variant="ghost" size="sm" onClick={() => router.push("/challenges")} className="w-fit gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Challenges
+            </Button>
+            <div className="flex items-center gap-2">
+              <Badge
+                variant="outline"
+                className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300"
+              >
+                {challenge.category}
+              </Badge>
+              <Badge
+                variant={
+                  challenge.difficulty === "Easy"
+                    ? "default"
+                    : challenge.difficulty === "Medium"
+                      ? "secondary"
+                      : "destructive"
+                }
+                className="bg-emerald-100 text-emerald-800 hover:bg-emerald-200 hover:text-emerald-900 dark:bg-emerald-900 dark:text-emerald-100 dark:hover:bg-emerald-800"
+              >
+                {challenge.difficulty}
+              </Badge>
             </div>
+            <h1 className="text-3xl font-bold tracking-tight">{challenge.title}</h1>
+            <p className="text-muted-foreground">{challenge.description}</p>
+          </div>
 
             <div className="grid gap-6 md:grid-cols-[2fr_1fr]">
               <div className="space-y-6">
@@ -375,7 +370,7 @@ export default function ChallengePage({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   )
 }

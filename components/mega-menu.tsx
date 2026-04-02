@@ -213,31 +213,6 @@ export function MegaMenu() {
           </Sheet>
         </div>
       </div>
-      <div className="hidden md:block bg-muted/40 border-t">
-        <div className="container flex h-10 items-center">
-          <nav className="flex items-center gap-4 text-sm text-muted-foreground">
-            <Link href="/tips?category=energy" className="hover:text-foreground">
-              Energy Tips
-            </Link>
-            <Link href="/tips?category=water" className="hover:text-foreground">
-              Water Conservation
-            </Link>
-            <Link href="/tips?category=waste" className="hover:text-foreground">
-              Waste Reduction
-            </Link>
-            <Link href="/tips?category=transport" className="hover:text-foreground">
-              Sustainable Transport
-            </Link>
-            <Link href="/tips?category=food" className="hover:text-foreground">
-              Sustainable Food
-            </Link>
-            <Link href="/ai-advisor" className="flex items-center gap-1 text-emerald-600 font-medium">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>AI Sustainability Advisor</span>
-            </Link>
-          </nav>
-        </div>
-      </div>
     </header>
   )
 }

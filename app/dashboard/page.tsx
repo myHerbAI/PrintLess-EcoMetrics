@@ -6,8 +6,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Leaf, Droplets, Zap, Trash2, ArrowRight } from "lucide-react"
-import Header from "@/components/header"
-import { Footer } from "@/components/footer"
 import { useAuth } from "@/context/auth-context"
 import Link from "next/link"
 
@@ -28,9 +26,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header activeLink="dashboard" />
-      <main className="flex-1 bg-muted/40">
+    <div className="bg-muted/40 min-h-screen">
         <div className="container px-4 py-6 md:px-6 md:py-12">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
@@ -328,8 +324,7 @@ export default function DashboardPage() {
             </Tabs>
           </div>
         </div>
-      </main>
-      <Footer />
+      </div>
     </div>
   )
 }
