@@ -27,6 +27,6 @@ EcoTrack is a comprehensive sustainability app that helps users track their envi
 ### Installation
 
 1. Clone the repository:
-   ```bash
+   \`\`\`bash
    git clone https://github.com/yourusername/ecotrack.git
    cd ecotrack
